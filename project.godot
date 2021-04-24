@@ -14,14 +14,32 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://devil/Devil.gd"
 }, {
+"base": "Resource",
+"class": "DialogItem",
+"language": "GDScript",
+"path": "res://dialog/dialog_item.gd"
+}, {
+"base": "Control",
+"class": "DialogMaster",
+"language": "GDScript",
+"path": "res://DialogMaster.gd"
+}, {
 "base": "Node2D",
 "class": "Person",
 "language": "GDScript",
 "path": "res://persons/Person.gd"
+}, {
+"base": "Resource",
+"class": "TextDialog",
+"language": "GDScript",
+"path": "res://dialog/text_dialog.gd"
 } ]
 _global_script_class_icons={
 "Devil": "res://editor/icons/devil.png",
-"Person": "res://editor/icons/dog.png"
+"DialogItem": "",
+"DialogMaster": "",
+"Person": "res://editor/icons/dog.png",
+"TextDialog": ""
 }
 
 [application]
@@ -29,6 +47,10 @@ _global_script_class_icons={
 config/name="ldjam48"
 run/main_scene="res://testing/GameRoot.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalReferences="*res://superobjects/GlobalReferences.gd"
 
 [display]
 

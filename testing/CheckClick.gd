@@ -23,6 +23,9 @@ func remove_smog():
 				person.material.set("shader_param/smogFactor", 0)
 
 
+func _ready():
+	set_process_input(false)
+
 func _process_persons():
 	var children: Array = get_children()
 	for x in children.size():

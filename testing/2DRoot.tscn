@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://persons/Stickman.tscn" type="PackedScene" id=1]
 [ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://devil/Devil.gd" type="Script" id=4]
 [ext_resource path="res://devil/halo.png" type="Texture" id=5]
 [ext_resource path="res://devil/Shard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://testing/LoadInitDialog.gd" type="Script" id=7]
+[ext_resource path="res://dialog/text_dialog.gd" type="Script" id=8]
+
+[sub_resource type="Resource" id=38]
+script = ExtResource( 8 )
+text = ""
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -285,6 +291,8 @@ shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
 [node name="2DRoot" type="Node2D"]
+script = ExtResource( 7 )
+dialog_start = SubResource( 38 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 640, 384 )
@@ -298,13 +306,12 @@ script = ExtResource( 3 )
 [node name="Person" parent="Persons" instance=ExtResource( 1 )]
 material = SubResource( 1 )
 position = Vector2( 131.782, 56 )
-siblingpaths = [ NodePath("../Person2"), NodePath("../Person3"), NodePath("../Person4") ]
+siblingpaths = "Person2,Person3,Person4"
 is_open = true
 
 [node name="Person2" parent="Persons" instance=ExtResource( 1 )]
 material = SubResource( 2 )
 position = Vector2( 274.559, 112.329 )
-siblingpaths = [ NodePath("../Person"), NodePath("../Person3"), NodePath("../Person6") ]
 
 [node name="Person3" parent="Persons" instance=ExtResource( 1 )]
 material = SubResource( 3 )
@@ -335,4 +342,3 @@ texture = ExtResource( 5 )
 [node name="Person6" parent="Persons" instance=ExtResource( 1 )]
 material = SubResource( 8 )
 position = Vector2( 380, 451 )
-siblingpaths = [ NodePath("../Person3"), NodePath("../Person4"), NodePath("../Person5") ]

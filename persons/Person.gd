@@ -3,7 +3,7 @@ extends Node2D
 class_name Person, "res://editor/icons/dog.png"
 
 
-export (Array, NodePath) var siblingpaths
+export (String, MULTILINE) var siblingpaths
 export (bool) var is_open
 
 var siblings: Array
@@ -25,9 +25,10 @@ func shake():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for path in siblingpaths:
-		var person: Person = get_node(path)
-		siblings.push_front(person)
+	if siblingpaths.length() > 0:
+		for subpath in siblingpaths.split(","):
+			var person: Person = get_node(NodePath("../%s" % subpath))
+			siblings.push_front(person)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
