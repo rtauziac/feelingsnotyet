@@ -4,3 +4,4 @@ class_name TextDialog
 
 
 export (String, MULTILINE) var text: String
+export (Texture) var portrait: Texture

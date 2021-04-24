@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://persons/Stickman.tscn" type="PackedScene" id=1]
 [ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=2]
@@ -8,10 +8,17 @@
 [ext_resource path="res://devil/Shard.tscn" type="PackedScene" id=6]
 [ext_resource path="res://testing/LoadInitDialog.gd" type="Script" id=7]
 [ext_resource path="res://dialog/text_dialog.gd" type="Script" id=8]
+[ext_resource path="res://testing/face01.png" type="Texture" id=9]
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 8 )
+text = "Where are we?"
+portrait = ExtResource( 9 )
 
 [sub_resource type="Resource" id=38]
 script = ExtResource( 8 )
-text = ""
+nextItem = SubResource( 39 )
+text = "mars 12, 1992"
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -295,6 +302,7 @@ script = ExtResource( 7 )
 dialog_start = SubResource( 38 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -163.79, -52.9167 )
 offset = Vector2( 640, 384 )
 rotating = true
 current = true

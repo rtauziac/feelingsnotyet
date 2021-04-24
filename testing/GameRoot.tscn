@@ -77,14 +77,14 @@ __meta__ = {
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 6 )
-margin_right = 1280.0
-margin_bottom = 768.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1280, 768 )
+size = Vector2( 1024, 600 )
 handle_input_locally = false
 disable_3d = true
 usage = 0
