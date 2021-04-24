@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://persons/Person.gd" type="Script" id=1]
+[ext_resource path="res://testing/bonhomme01.png" type="Texture" id=2]
+[ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 3 )
+shader_param/smogFactor = 0.0
+
+[node name="Person" type="Sprite"]
+material = SubResource( 15 )
+texture = ExtResource( 2 )
+centered = false
+script = ExtResource( 1 )

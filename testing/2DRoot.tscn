@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://persons/Stickman.tscn" type="PackedScene" id=1]
+[ext_resource path="res://testing/CheckClick.gd" type="Script" id=3]
+
+[node name="2DRoot" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 640, 384 )
+current = true
+smoothing_enabled = true
+
+[node name="Persons" type="Node2D" parent="."]
+position = Vector2( 464, 284 )
+script = ExtResource( 3 )
+
+[node name="Person" parent="Persons" instance=ExtResource( 1 )]
