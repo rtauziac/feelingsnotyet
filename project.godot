@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "TextDialog",
 "language": "GDScript",
 "path": "res://dialog/text_dialog.gd"
+}, {
+"base": "Resource",
+"class": "WaitDialog",
+"language": "GDScript",
+"path": "res://dialog/wait_dialog.gd"
 } ]
 _global_script_class_icons={
 "Devil": "res://editor/icons/devil.png",
 "DialogItem": "",
 "DialogMaster": "",
 "Person": "res://editor/icons/dog.png",
-"TextDialog": ""
+"TextDialog": "",
+"WaitDialog": ""
 }
 
 [application]

@@ -14,13 +14,13 @@ func set_smog_for_person(the_person: Person):
 		if person is Person:
 			var is_friend = all_friends.has(person)
 			var is_self = person == the_person
-			person.fog = is_friend or is_self
+			person.fog = not (is_friend or is_self)
 
 
 func remove_smog():
 		for person in get_children():
 			if person is Person:
-				person.material.set("shader_param/smogFactor", 0)
+				person.fog = false
 
 
 func _ready():

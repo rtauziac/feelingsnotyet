@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://dialog/text_dialog.gd" type="Script" id=1]
+[ext_resource path="res://testing/face01.png" type="Texture" id=2]
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 1 )
+text = "Where are we?"
+portrait = ExtResource( 2 )
+blink = true
+
+[resource]
+script = ExtResource( 1 )
+nextItem = SubResource( 39 )
+text = "mars 12, 1992"
+blink = false
