@@ -1,11 +1,19 @@
-extends Node2D
+extends YSort
 
+class_name PersonHandler
 
 var _current_person: Person = null
+var _remove_current_person_at_end_dialog: bool = false
 
 
 func focus_person(the_person: Person):
 	set_smog_for_person(the_person)
+
+
+func start_talk_person(person_name: String):
+	var person = get_node_or_null(person_name)
+	if person is Person:
+		person.talk()
 
 
 func set_smog_for_person(the_person: Person):
@@ -24,30 +32,42 @@ func remove_smog():
 
 
 func _ready():
+	GlobalReferences.person_handler = self
 	set_process_input(false)
+	call_deferred("_ready_later")
+
+func _ready_later():
+	GlobalReferences.dialog_master.connect("dialog_signal", self, "_on_dialog_signal")
 
 func _process_persons():
 	var children: Array = get_children()
 	for x in children.size():
 		var person = children[-x+1]
 		if person is Person:
-			var person_available = false
-			if (_current_person == null):
-				person_available = person.is_open
-			else:
-				person_available = _current_person.siblings.has(person) or person == _current_person
-			if person_available:
-				var person_rect: Rect2 = Rect2(to_global(person.position), person.get_size())
-				if person_rect.has_point(get_global_mouse_position()):
-#						print("%s clicked" % person.name)
-					get_tree().set_input_as_handled()
+			var person_rect: Rect2 = Rect2(to_global(person.position), person.get_size())
+			if person_rect.has_point(get_global_mouse_position()):
+				var sibling = _current_person.siblings.has(person) if _current_person != null else false
+				var focusable: bool = person.is_open or sibling
+				var has_open_dialog: bool = person.open_dialog != null
+				var has_close_dialog: bool = person.close_dialog != null
+				var focused: bool = _current_person != null
+				if focusable:
 					_current_person = person
-					focus_person(person)
-					var devil: Devil = person.get_node_or_null("Devil")
-					if devil != null:
-						devil.visible = true
-						devil.start_shards()
+					if has_open_dialog:
+						GlobalReferences.dialog_master.connect("dialog_end_reached", self, "_dialog_did_end", [], CONNECT_ONESHOT)
+						GlobalReferences.dialog_master.show_dialog(person.open_dialog)
+					else:
+						_focus_current_person()
+					get_tree().set_input_as_handled()
 					break
+				else:
+					if not focused and has_close_dialog:
+						_current_person = person
+						_remove_current_person_at_end_dialog = true
+						GlobalReferences.dialog_master.connect("dialog_end_reached", self, "_dialog_did_end", [], CONNECT_ONESHOT)
+						GlobalReferences.dialog_master.show_dialog(person.close_dialog)
+						get_tree().set_input_as_handled()
+						break
 	if not get_tree().is_input_handled():
 		get_tree().set_input_as_handled()
 		_current_person = null
@@ -61,3 +81,25 @@ func _input(event):
 				return
 			else:
 				_process_persons()
+
+
+func _dialog_did_end():
+	if _remove_current_person_at_end_dialog:
+		_remove_current_person_at_end_dialog = false
+		_current_person = null
+
+
+func _on_dialog_signal(signal_name):
+	if signal_name is String:
+		match signal_name:
+			"focus_current_person":
+				_focus_current_person()
+
+
+func _focus_current_person():
+	focus_person(_current_person)
+	var devil: Devil = _current_person.get_node_or_null("Devil")
+	if devil != null:
+		devil.visible = true
+		devil.start_shards()
+		set_process_input(false)

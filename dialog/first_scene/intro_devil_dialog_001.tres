@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://persons/faces/stephan_neutral.png" type="Texture" id=1]
+[ext_resource path="res://persons/faces/stephan_worry.png" type="Texture" id=2]
+[ext_resource path="res://persons/faces/nixie_neutral.png" type="Texture" id=3]
+[ext_resource path="res://dialog/text_dialog.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+text = ""
+name = "Nyxie"
+portrait = ExtResource( 3 )
+blink = true
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+nextItem = SubResource( 1 )
+text = "Look at that load of loneliness.
+It must have started to beat her feelings already!"
+name = "Stephan"
+portrait = ExtResource( 2 )
+blink = false
+
+[resource]
+script = ExtResource( 4 )
+nextItem = SubResource( 2 )
+text = "Look at that monster!
+She’s in danger."
+name = "Stephan"
+portrait = ExtResource( 1 )
+blink = false

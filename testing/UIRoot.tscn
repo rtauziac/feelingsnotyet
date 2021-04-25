@@ -16,6 +16,7 @@ __meta__ = {
 }
 
 [node name="DialogMaster" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
@@ -35,6 +36,7 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="DialogMaster/HBoxContainer"]
 margin_right = 189.0
 margin_bottom = 197.0
+size_flags_vertical = 0
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
@@ -113,7 +115,7 @@ margin_right = 795.0
 margin_bottom = 161.0
 rect_min_size = Vector2( 0, 141 )
 size_flags_vertical = 0
-text = "Hello world"
+autowrap = true
 max_lines_visible = 6
 
 [node name="MouseCursorHandler" type="Control" parent="."]

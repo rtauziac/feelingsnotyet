@@ -5,12 +5,14 @@ export (Resource) var dialog_start
 
 
 func _ready():
-	
 	var a_timer = Timer.new()
 	add_child(a_timer)
-	a_timer.wait_time = 2
-	a_timer.connect("timeout", self, "_load_first_dialog", [], CONNECT_ONESHOT)
-	a_timer.start()
+	if dialog_start == null:
+		_enable_game_input()
+	else:
+		a_timer.wait_time = 2
+		a_timer.connect("timeout", self, "_load_first_dialog", [], CONNECT_ONESHOT)
+		a_timer.start()
 
 
 func _load_first_dialog():

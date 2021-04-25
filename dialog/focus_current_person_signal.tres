@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+signal_name = "focus_current_person"

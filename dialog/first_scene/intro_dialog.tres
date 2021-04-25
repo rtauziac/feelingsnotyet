@@ -1,16 +1,106 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=19 format=2]
 
 [ext_resource path="res://dialog/text_dialog.gd" type="Script" id=1]
-[ext_resource path="res://testing/face01.png" type="Texture" id=2]
+[ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=2]
+[ext_resource path="res://persons/faces/nixie_neutral.png" type="Texture" id=3]
+[ext_resource path="res://persons/faces/stephan_relief.png" type="Texture" id=4]
+[ext_resource path="res://persons/faces/stephan_neutral.png" type="Texture" id=5]
+[ext_resource path="res://persons/faces/nixie_serious.png" type="Texture" id=6]
+[ext_resource path="res://persons/faces/stephan_worry.png" type="Texture" id=7]
 
-[sub_resource type="Resource" id=39]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 1 )
-text = "Where are we?"
-portrait = ExtResource( 2 )
+text = "Let’s help this poor girl quick. I’ll talk to her."
+name = "Nyxie"
+portrait = ExtResource( 3 )
 blink = true
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 1 )
+nextItem = SubResource( 1 )
+text = "I feel so embarrassed right now.
+I told you it’s the last time we sneak in other people’s burial..."
+name = "Nyxie"
+portrait = ExtResource( 6 )
+blink = true
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+nextItem = SubResource( 2 )
+text = "......"
+name = "Stephan"
+portrait = ExtResource( 7 )
+blink = true
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 1 )
+nextItem = SubResource( 3 )
+text = "Do you have any idea of who’s in the coffin?"
+name = "Nyxie"
+portrait = ExtResource( 3 )
+blink = true
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+nextItem = SubResource( 4 )
+text = "But look at this girl...
+She looks so despaired right now.
+Nyxie, please consider the idea…"
+name = "Stephan"
+portrait = ExtResource( 7 )
+blink = true
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 1 )
+nextItem = SubResource( 5 )
+text = "The world lived so far without my intervention.
+People have to feel emotions, that’s as important as eating and breathing."
+name = "Nyxie"
+portrait = ExtResource( 6 )
+blink = false
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 1 )
+nextItem = SubResource( 6 )
+text = "I can’t help everyone on this poor planet, it’s a burden I can’t  handle on my own, neither I want."
+name = "Nyxie"
+portrait = ExtResource( 6 )
+blink = true
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 1 )
+nextItem = SubResource( 7 )
+text = "Also, I really like when you’re doing your thing. It’s so impressive it never gets old."
+name = "Stephan"
+portrait = ExtResource( 4 )
+blink = true
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 1 )
+nextItem = SubResource( 8 )
+text = "That’s because there’s people in need, and it’s on our way to work."
+name = "Stephan"
+portrait = ExtResource( 5 )
+blink = true
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 1 )
+nextItem = SubResource( 9 )
+text = "Well, here we are.
+Stephan, why are we here at first?"
+name = "Nyxie"
+portrait = ExtResource( 3 )
+blink = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+nextItem = SubResource( 10 )
+wait_time = 1.0
 
 [resource]
 script = ExtResource( 1 )
-nextItem = SubResource( 39 )
-text = "mars 12, 1992"
+nextItem = SubResource( 11 )
+text = "France,
+Mars 12, 1994"
+name = ""
 blink = false

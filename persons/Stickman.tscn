@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://persons/Person.gd" type="Script" id=1]
 [ext_resource path="res://testing/bonhomme01.png" type="Texture" id=2]
@@ -23,7 +23,36 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 19, 29 ), Vector2( 23.5, -15.5 ), Vector2( -34, 15.5 ), Vector2( 13.5, -9.5 ), Vector2( -47.5, -39 ), Vector2( 1.5, 17 ), Vector2( -10.5, -21.5 ), Vector2( -11.5, -5 ), Vector2( 3, -7.5 ), Vector2( -4, -2.5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 11.8648, 8.18888 ), Vector2( 2.68887, -30.3651 ), Vector2( -18.243, -2.0408 ), Vector2( 4.28365, -11.2838 ), Vector2( -11.2292, -3.9184 ), Vector2( 3.8784, -5.29763 ), Vector2( 3.17588, 4.06795 ), Vector2( -2.28365, -8.56762 ), Vector2( 2.10811, -3.04047 ), Vector2( -1.91888, -0.71619 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "squeeze"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -4, 10 ), Vector2( 4, -12 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 0.9 ), Vector2( 0.9, 1.1 ), Vector2( 1, 1 ) ]
 }
 
 [node name="Person" type="Node2D"]
@@ -37,3 +66,4 @@ centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/shake = SubResource( 2 )
+anims/squeeze = SubResource( 3 )

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://persons/sprites/Fiona.png" type="Texture" id=1]
+[ext_resource path="res://dialog/text_dialog.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+text = "Now that he’s not here anymore, what am I supposed to do?
+"
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = true
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+nextItem = SubResource( 1 )
+text = "I never had the chance to thank him.
+"
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = true
+
+[resource]
+script = ExtResource( 2 )
+nextItem = SubResource( 2 )
+text = "....."
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = false

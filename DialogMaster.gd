@@ -9,17 +9,27 @@ signal dialog_end_reached
 var _current_dialog_item: DialogItem
 var _timer: Timer = Timer.new()
 var _text_tween: Tween = Tween.new()
+var _showing_text_characters: bool = false
 onready var text_label: Label = $HBoxContainer/DialogContainer/TextMargin/DialogLabel
 
 func show_dialog(item: DialogItem):
+	set_process_input(true)
 	if item is TextDialog:
 		visible = true
 		_current_dialog_item = item
 		text_label.text = item.text
 		text_label.visible_characters = 0
 		var char_count = text_label.text.length()
-		_text_tween.interpolate_property(text_label, "visible_characters", 0, char_count, char_count * 0.02, Tween.TRANS_LINEAR)
+		var wait_time = char_count * 0.02
+		_text_tween.interpolate_property(text_label, "visible_characters", 0, char_count, wait_time, Tween.TRANS_LINEAR)
 		_text_tween.start()
+		_showing_text_characters = true
+#		print("stc true (%f)" % wait_time)
+		_timer.wait_time = wait_time
+		_timer.connect("timeout", self, "_end_showing_characters", [], CONNECT_ONESHOT)
+		_timer.start()
+		if item.name != null and item.name.length() > 0:
+			GlobalReferences.person_handler.start_talk_person(item.name)
 		if item.portrait != null:
 			$HBoxContainer/MarginContainer.visible = true
 			$HBoxContainer/MarginContainer/PortraitMargin/PortraitTexture.texture = item.portrait
@@ -27,9 +37,15 @@ func show_dialog(item: DialogItem):
 			$HBoxContainer/MarginContainer.visible = false
 	elif item is WaitDialog:
 		visible = false
+		_current_dialog_item = item
 		_timer.wait_time = item.wait_time
 		_timer.connect("timeout", self, "_process_next_dialog", [], CONNECT_ONESHOT)
 		_timer.start()
+	elif item is SignalDialog:
+		_current_dialog_item = item
+		emit_signal("dialog_signal") if item.signal_name == null else emit_signal("dialog_signal", item.signal_name)
+		_process_next_dialog()
+		pass
 
 
 func _ready():
@@ -37,6 +53,7 @@ func _ready():
 	visible = false
 	add_child(_timer)
 	add_child(_text_tween)
+	set_process_input(false)
 
 
 func _input(event):
@@ -46,9 +63,13 @@ func _input(event):
 			return
 		if visible == false:
 			return
-		if _text_tween.is_active():
+		if _showing_text_characters:
 			_text_tween.stop_all()
+			_timer.stop()
+			_timer.disconnect("timeout", self, "_end_showing_characters")
 			text_label.visible_characters = -1
+			_showing_text_characters = false
+#			print("stc false")
 		else:
 			_process_next_dialog()
 
@@ -57,7 +78,7 @@ func _process_next_dialog():
 	_current_dialog_item = _current_dialog_item.nextItem
 	if _current_dialog_item != null:
 		if _current_dialog_item is TextDialog and _current_dialog_item.blink:
-			_timer.wait_time = 0.2
+			_timer.wait_time = 0.12
 			_timer.connect("timeout", self, "show_dialog", [_current_dialog_item], CONNECT_ONESHOT)
 			_timer.start()
 			visible = false
@@ -67,3 +88,9 @@ func _process_next_dialog():
 		visible = false
 		set_process_input(false)
 		emit_signal("dialog_end_reached")
+
+
+func _end_showing_characters():
+	_showing_text_characters = false
+#	print("stc false")
+

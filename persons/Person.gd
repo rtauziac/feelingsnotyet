@@ -6,6 +6,9 @@ class_name Person, "res://editor/icons/dog.png"
 export (String, MULTILINE) var siblingpaths
 export (bool) var is_open
 
+export (Resource) var close_dialog
+export (Resource) var open_dialog
+
 var siblings: Array
 
 var _tween: Tween = Tween.new()
@@ -25,8 +28,15 @@ func get_size():
 
 
 func shake():
-	$AnimationPlayer.stop(true)
+	$AnimationPlayer.stop()
+	$AnimationPlayer.seek(0)
 	$AnimationPlayer.play("shake")
+
+
+func talk():
+	$AnimationPlayer.stop()
+	$AnimationPlayer.seek(0)
+	$AnimationPlayer.play("squeeze")
 
 
 # Called when the node enters the scene tree for the first time.
