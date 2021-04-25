@@ -1,29 +1,124 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=23 format=2]
 
 [ext_resource path="res://persons/sprites/Fiona.png" type="Texture" id=1]
 [ext_resource path="res://dialog/text_dialog.gd" type="Script" id=2]
+[ext_resource path="res://persons/faces/nixie_neutral.png" type="Texture" id=3]
+[ext_resource path="res://persons/faces/nixie_smile.png" type="Texture" id=4]
+[ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=5]
+[ext_resource path="res://persons/faces/stephan_neutral.png" type="Texture" id=6]
+[ext_resource path="res://persons/faces/stephan_relief.png" type="Texture" id=7]
+[ext_resource path="res://persons/faces/nixie_serious.png" type="Texture" id=8]
+[ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=9]
 
 [sub_resource type="Resource" id=1]
+script = ExtResource( 9 )
+signal_name = "load_level_02"
+
+[sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
+nextItem = SubResource( 1 )
+text = "Now it’s time to keep low profile and get out of this place, quick."
+name = "Nyxie"
+portrait = ExtResource( 8 )
+blink = true
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+nextItem = SubResource( 2 )
+text = "I’m sorry but...
+Who are you?"
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = true
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+nextItem = SubResource( 3 )
+text = "I told you those are not monsters...
+We’re talking about real people, with feelings.
+Stop making the situation even more embarrassing..."
+name = "Nyxie"
+portrait = ExtResource( 8 )
+blink = true
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+nextItem = SubResource( 4 )
+text = "The way you get rid of this creature!
+That’s indecent how you beat the thing up that easily."
+name = "Stephan"
+portrait = ExtResource( 7 )
+blink = true
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+nextItem = SubResource( 5 )
+text = "...sorry, what?"
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = true
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+nextItem = SubResource( 6 )
+text = "That was reaaaally AWESOME!"
+name = "Stephan"
+portrait = ExtResource( 6 )
+blink = false
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+nextItem = SubResource( 7 )
+wait_time = 3.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+nextItem = SubResource( 8 )
+text = "I hope you’re right.
+Now please, excuse me, I need to be alone for a while."
+name = "Fiona"
+portrait = ExtResource( 1 )
+blink = true
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 2 )
+nextItem = SubResource( 9 )
+text = "You will get through difficult moments, but you’re not alone. I know there’s people that will take good care of you."
+name = "Nyxie"
+portrait = ExtResource( 4 )
+blink = false
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+nextItem = SubResource( 10 )
+text = "That’s right if you need time, take as much as you need.
+You don’t have to take it all on your shoulder."
+name = "Nyxie"
+portrait = ExtResource( 3 )
+blink = true
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 2 )
+nextItem = SubResource( 11 )
 text = "Now that he’s not here anymore, what am I supposed to do?
 "
 name = "Fiona"
 portrait = ExtResource( 1 )
 blink = true
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=13]
 script = ExtResource( 2 )
-nextItem = SubResource( 1 )
+nextItem = SubResource( 12 )
 text = "I never had the chance to thank him.
-"
+I miss him so much."
 name = "Fiona"
 portrait = ExtResource( 1 )
 blink = true
 
 [resource]
 script = ExtResource( 2 )
-nextItem = SubResource( 2 )
-text = "....."
+nextItem = SubResource( 13 )
+text = ".....(sigh)"
 name = "Fiona"
 portrait = ExtResource( 1 )
 blink = false

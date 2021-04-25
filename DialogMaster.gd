@@ -6,6 +6,7 @@ signal dialog_signal
 signal dialog_end_reached
 
 
+export (bool) var consume_inputs = true
 var _current_dialog_item: DialogItem
 var _timer: Timer = Timer.new()
 var _text_tween: Tween = Tween.new()
@@ -58,7 +59,8 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		get_tree().set_input_as_handled()
+		if consume_inputs:
+			get_tree().set_input_as_handled()
 		if _current_dialog_item == null:
 			return
 		if visible == false:

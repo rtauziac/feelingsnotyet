@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/speech5.wav-9e20b945152136ddba049d6c14a77f11.sample"
+
+[deps]
+
+source_file="res://sounds/speech5.wav"
+dest_files=[ "res://.import/speech5.wav-9e20b945152136ddba049d6c14a77f11.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

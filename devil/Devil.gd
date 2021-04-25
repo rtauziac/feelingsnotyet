@@ -15,6 +15,9 @@ var _tweener: Tween
 var _timer: Timer
 var _rotate_amount = 0
 
+var _hurt = preload("res://sounds/hurt.wav")
+var _slash = preload("res://sounds/slash.wav")
+
 
 func start_shards():
 	set_process(true)
@@ -27,9 +30,8 @@ func start_shards():
 		_timer.connect("timeout", self, "_create_shard", [3], CONNECT_ONESHOT)
 		_timer.start()
 	else:
-		GlobalReferences.dialog_master.connect("dialog_signal", self, "_create_shard", [], CONNECT_ONESHOT)
 		GlobalReferences.dialog_master.show_dialog(intro_dialog)
-
+		GlobalReferences.dialog_master.connect("dialog_end_reached", self, "_create_shard", [3], CONNECT_ONESHOT)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,6 +53,8 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if _current_shard != null:
 			lives -= 1
+			$AudioStreamPlayer.stream = _hurt
+			$AudioStreamPlayer.play(0)
 			_tweener.stop_all()
 			_timer.disconnect("timeout", self, "emit_hurt")
 			_timer.stop()
@@ -87,6 +91,8 @@ func _create_shard(duration):
 
 func emit_hurt():
 	emit_signal("hurt")
+	$AudioStreamPlayer.stream = _slash
+	$AudioStreamPlayer.play(0)
 	var anim_len = 0.3
 	_fade_out(anim_len)
 	_timer.wait_time = anim_len
@@ -115,3 +121,5 @@ func _destroy_and_continue():
 	person_handler.set_process_input(true)
 	if end_dialog != null:
 		GlobalReferences.dialog_master.show_dialog(end_dialog)
+
+

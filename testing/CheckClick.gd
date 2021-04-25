@@ -4,6 +4,12 @@ class_name PersonHandler
 
 var _current_person: Person = null
 var _remove_current_person_at_end_dialog: bool = false
+var _speech01 = preload("res://sounds/speech1.wav")
+var _speech02 = preload("res://sounds/speech2.wav")
+var _speech03 = preload("res://sounds/speech3.wav")
+var _speech04 = preload("res://sounds/speech4.wav")
+var _speech05 = preload("res://sounds/speech5.wav")
+var _speech06 = preload("res://sounds/speech6.wav")
 
 
 func focus_person(the_person: Person):
@@ -11,6 +17,20 @@ func focus_person(the_person: Person):
 
 
 func start_talk_person(person_name: String):
+	match person_name:
+		"Nyxie":
+			$AudioStreamPlayer.stream = _speech01
+		"Stephan":
+			$AudioStreamPlayer.stream = _speech02
+		"Fiona":
+			$AudioStreamPlayer.stream = _speech03
+		"Charles":
+			$AudioStreamPlayer.stream = _speech05
+		"Louyse":
+			$AudioStreamPlayer.stream = _speech04
+		_:
+			$AudioStreamPlayer.stream = _speech06
+	$AudioStreamPlayer.play(0)
 	var person = get_node_or_null(person_name)
 	if person is Person:
 		person.talk()
@@ -46,11 +66,12 @@ func _process_persons():
 		if person is Person:
 			var person_rect: Rect2 = Rect2(to_global(person.position), person.get_size())
 			if person_rect.has_point(get_global_mouse_position()):
+				var focused: bool = _current_person != null
+				var is_self: bool = person == _current_person
 				var sibling = _current_person.siblings.has(person) if _current_person != null else false
-				var focusable: bool = person.is_open or sibling
+				var focusable: bool = true if is_self else (sibling if focused else person.is_open)
 				var has_open_dialog: bool = person.open_dialog != null
 				var has_close_dialog: bool = person.close_dialog != null
-				var focused: bool = _current_person != null
 				if focusable:
 					_current_person = person
 					if has_open_dialog:

@@ -19,7 +19,7 @@ blink = true
 script = ExtResource( 1 )
 nextItem = SubResource( 1 )
 text = "I feel so embarrassed right now.
-I told you it’s the last time we sneak in other people’s burial..."
+I told you it’s the last time we sneak into other people’s burial..."
 name = "Nyxie"
 portrait = ExtResource( 6 )
 blink = true
@@ -45,7 +45,7 @@ script = ExtResource( 1 )
 nextItem = SubResource( 4 )
 text = "But look at this girl...
 She looks so despaired right now.
-Nyxie, please consider the idea…"
+Nyxie, please consider the idea..."
 name = "Stephan"
 portrait = ExtResource( 7 )
 blink = true

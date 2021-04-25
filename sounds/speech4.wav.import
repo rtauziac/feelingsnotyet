@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/speech4.wav-44b2225e5d71fb46d95651003e3a184a.sample"
+
+[deps]
+
+source_file="res://sounds/speech4.wav"
+dest_files=[ "res://.import/speech4.wav-44b2225e5d71fb46d95651003e3a184a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
