@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bonhomme01.png-fa12c8f53fe4ebc2242a73b6b075b388.stex"
+path="res://.import/character_01.png-5ddaec935e48f392b8f4c7bac5de36be.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://testing/bonhomme01.png"
-dest_files=[ "res://.import/bonhomme01.png-fa12c8f53fe4ebc2242a73b6b075b388.stex" ]
+source_file="res://menu/character_01.png"
+dest_files=[ "res://.import/character_01.png-5ddaec935e48f392b8f4c7bac5de36be.stex" ]
 
 [params]
 
@@ -21,11 +21,11 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false

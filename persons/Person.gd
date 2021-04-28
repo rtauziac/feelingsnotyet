@@ -27,6 +27,11 @@ func get_size():
 	return $Sprite.texture.get_size()
 
 
+func get_rect():
+	var pos_offset = position if not $Sprite.centered else position - ($Sprite.texture.get_size() / 2)
+	return Rect2(pos_offset, $Sprite.texture.get_size())
+
+
 func shake():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.seek(0)

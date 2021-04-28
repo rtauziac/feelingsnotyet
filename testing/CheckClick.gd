@@ -33,6 +33,7 @@ func start_talk_person(person_name: String):
 	var person = get_node_or_null(person_name)
 	if person is Person:
 		person.talk()
+		get_parent().get_node("CameraHolder").move_to_position(person.position)
 
 
 func set_smog_for_person(the_person: Person):
@@ -63,7 +64,8 @@ func _process_persons():
 	for x in children.size():
 		var person = children[-x+1]
 		if person is Person:
-			var person_rect: Rect2 = Rect2(to_global(person.position), person.get_size())
+			var local_rect: Rect2 = person.get_rect()
+			var person_rect: Rect2 = Rect2(to_global(local_rect.position), local_rect.size)
 			if person_rect.has_point(get_global_mouse_position()):
 				var focused: bool = _current_person != null
 				var is_self: bool = person == _current_person

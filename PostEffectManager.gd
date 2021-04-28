@@ -30,7 +30,7 @@ func set_color_scheme(_scheme: int):
 
 
 func set_vignette_factor(factor: float):
-	_tweener.interpolate_property(material, "shader_param/vignetteFactor", material.get("shader_param/vignetteFactor"), factor, 1, Tween.TRANS_LINEAR)
+	_tweener.interpolate_property(material, "shader_param/vignetteFactor", material.get("shader_param/vignetteFactor"), factor, 1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	_tweener.start()
 
 func _ready():

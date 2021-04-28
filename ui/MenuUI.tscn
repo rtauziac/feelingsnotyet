@@ -12,16 +12,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_left = 294.0
-margin_top = 354.0
-margin_right = 690.0
-margin_bottom = 423.0
-text = "FEELINGS NOT YET
-
-a game by @crazyrems"
-align = 1
-
 [node name="Play" type="Button" parent="."]
 margin_left = 381.0
 margin_top = 463.0

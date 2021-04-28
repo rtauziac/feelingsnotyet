@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://persons/Louyse.tscn" type="PackedScene" id=1]
 [ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://CameraHolder.gd" type="Script" id=25]
 [ext_resource path="res://dialog/first_scene/intro_devil_dialog_001.tres" type="Resource" id=26]
 [ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=27]
-[ext_resource path="res://dialog/first_scene/intro_dialog.tres" type="Resource" id=28]
 [ext_resource path="res://sounds/Outdoor_Ambiance.ogg" type="AudioStream" id=29]
 [ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=30]
 
@@ -94,27 +93,27 @@ name = "Fiona"
 portrait = ExtResource( 17 )
 blink = false
 
-[sub_resource type="Resource" id=21]
+[sub_resource type="Resource" id=10]
 script = ExtResource( 27 )
 nextItem = ExtResource( 26 )
 wait_time = 2.0
 
-[sub_resource type="Resource" id=20]
+[sub_resource type="Resource" id=19]
 script = ExtResource( 30 )
-nextItem = SubResource( 21 )
+nextItem = SubResource( 10 )
 signal_name = "vignette_factor:1"
 
-[sub_resource type="Resource" id=18]
+[sub_resource type="Resource" id=20]
 script = ExtResource( 30 )
-nextItem = SubResource( 20 )
+nextItem = SubResource( 19 )
 signal_name = "color_scheme:dark_red"
 
-[sub_resource type="ShaderMaterial" id=11]
+[sub_resource type="ShaderMaterial" id=21]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=22]
 script = ExtResource( 18 )
 nextItem = ExtResource( 8 )
 text = "I know Phillip.
@@ -124,12 +123,12 @@ name = "Charles"
 portrait = ExtResource( 23 )
 blink = false
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=23]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=16]
 script = ExtResource( 18 )
 nextItem = ExtResource( 8 )
 text = "Phillip was everything to her."
@@ -137,16 +136,16 @@ name = "Louyse"
 portrait = ExtResource( 24 )
 blink = false
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id=17]
 script = ExtResource( 18 )
-nextItem = SubResource( 14 )
+nextItem = SubResource( 16 )
 text = "Poor Fiona.
 I’m not sure she’s gonna get through it, I know she’ll have trouble to recover."
 name = "Louyse"
 portrait = ExtResource( 24 )
 blink = false
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 length = 6.0
 loop = true
 tracks/0/type = "value"
@@ -165,7 +164,7 @@ tracks/0/keys = {
 [node name="2DRoot" type="Node2D"]
 position = Vector2( 0, -1 )
 script = ExtResource( 7 )
-dialog_start = ExtResource( 28 )
+dialog_start = ExtResource( 19 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 509.302, 296.699 )
@@ -179,42 +178,41 @@ __meta__ = {
 
 [node name="Nyxie" parent="Persons" instance=ExtResource( 6 )]
 material = SubResource( 1 )
-position = Vector2( 306.872, 97.221 )
+position = Vector2( 343, 147 )
 siblingpaths = "Stephan"
 close_dialog = SubResource( 2 )
 
 [node name="Stephan" parent="Persons" instance=ExtResource( 9 )]
 material = SubResource( 3 )
-position = Vector2( 226.636, 104.785 )
+position = Vector2( 263, 154 )
 siblingpaths = "Nyxie"
 is_open = true
 open_dialog = SubResource( 5 )
 
 [node name="Fiona" parent="Persons" instance=ExtResource( 5 )]
 material = SubResource( 6 )
-position = Vector2( 436.056, 155.8 )
+position = Vector2( 473, 205 )
 close_dialog = SubResource( 9 )
 
 [node name="Devil" parent="Persons/Fiona" instance=ExtResource( 10 )]
-position = Vector2( 36.8973, 65.6333 )
-intro_dialog = SubResource( 18 )
+intro_dialog = SubResource( 20 )
 end_dialog = ExtResource( 19 )
 
 [node name="Charles" parent="Persons" instance=ExtResource( 4 )]
-material = SubResource( 11 )
-position = Vector2( 513.052, 106.292 )
+material = SubResource( 21 )
+position = Vector2( 550, 156 )
 is_open = true
-open_dialog = SubResource( 12 )
+open_dialog = SubResource( 22 )
 
 [node name="Sprite" parent="Persons/Charles" index="0"]
 flip_h = true
 
 [node name="Louyse" parent="Persons" instance=ExtResource( 1 )]
-material = SubResource( 13 )
-position = Vector2( 575.107, 196.272 )
+material = SubResource( 23 )
+position = Vector2( 612, 246 )
 siblingpaths = "Fiona"
 is_open = true
-open_dialog = SubResource( 15 )
+open_dialog = SubResource( 17 )
 
 [node name="Sprite" parent="Persons/Louyse" index="0"]
 flip_h = true
@@ -285,7 +283,9 @@ current = true
 smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraHolder"]
-anims/handshake = SubResource( 16 )
+anims/handshake = SubResource( 18 )
+
+[node name="Tween" type="Tween" parent="CameraHolder"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 29 )
