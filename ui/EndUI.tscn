@@ -26,28 +26,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -280.5
-margin_top = -259.5
-margin_right = 280.5
-margin_bottom = 145.5
+margin_left = -305.0
+margin_top = -259.0
+margin_right = 305.0
+margin_bottom = 214.0
+custom_constants/line_spacing = -4
 text = "Thank you for playing!
 
-It’s been really nice
-to have you up until the end
-of the story I made this far.
+It’s been really nice to have you up until the end of the story I made this far.
 
-There was more on backstage
-but time went short.
+There was more on backstage but time went short.
 
 I hope you liked it anyway.
 
-If you liked my work,
-feel free to follow me
-on Twitter
+If you liked my work, feel free to follow me on Twitter
 @crazyrems
 
 Good luck for the ratings!"
 align = 1
+autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.5

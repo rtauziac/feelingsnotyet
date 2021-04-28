@@ -19,18 +19,17 @@ func focus_person(the_person: Person):
 func start_talk_person(person_name: String):
 	match person_name:
 		"Nyxie":
-			$AudioStreamPlayer.stream = _speech01
+			SoundManager.play_sound_oneshot(_speech01)
 		"Stephan":
-			$AudioStreamPlayer.stream = _speech02
+			SoundManager.play_sound_oneshot(_speech02)
 		"Fiona":
-			$AudioStreamPlayer.stream = _speech03
+			SoundManager.play_sound_oneshot(_speech03)
 		"Charles":
-			$AudioStreamPlayer.stream = _speech05
+			SoundManager.play_sound_oneshot(_speech05)
 		"Louyse":
-			$AudioStreamPlayer.stream = _speech04
+			SoundManager.play_sound_oneshot(_speech04)
 		_:
-			$AudioStreamPlayer.stream = _speech06
-	$AudioStreamPlayer.play(0)
+			SoundManager.play_sound_oneshot(_speech06)
 	var person = get_node_or_null(person_name)
 	if person is Person:
 		person.talk()

@@ -29,7 +29,7 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -197.0
+margin_top = -223.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -73,7 +73,7 @@ texture = ExtResource( 6 )
 [node name="DialogContainer" type="MarginContainer" parent="DialogMaster/HBoxContainer"]
 margin_left = 193.0
 margin_right = 1024.0
-margin_bottom = 197.0
+margin_bottom = 223.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -87,7 +87,7 @@ __meta__ = {
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 823.0
-margin_bottom = 189.0
+margin_bottom = 215.0
 texture = ExtResource( 1 )
 patch_margin_left = 16
 patch_margin_top = 16
@@ -98,7 +98,7 @@ patch_margin_bottom = 16
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 823.0
-margin_bottom = 189.0
+margin_bottom = 215.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 20
@@ -113,11 +113,12 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 795.0
-margin_bottom = 161.0
+margin_bottom = 187.0
 rect_min_size = Vector2( 0, 141 )
 size_flags_vertical = 0
+text = "Thank you for your interest in Silver, the premiere multi-language pixel font for games and game-likers. Silver has TRC and Lotcheck compliant gamepad buttons built right into the font, alongside a full keyboard and mouse prompts! No more overlaying images onto your text fields!"
 autowrap = true
-max_lines_visible = 6
+max_lines_visible = 5
 
 [node name="MouseCursorHandler" type="Control" parent="."]
 anchor_right = 1.0

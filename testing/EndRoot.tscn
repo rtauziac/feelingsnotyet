@@ -96,4 +96,4 @@ render_target_update_mode = 3
 
 [node name="Control" parent="ViewportContainer/Viewport/UICanvasLayer" instance=ExtResource( 1 )]
 
-[node name="UIRoot" parent="ViewportContainer/Viewport/UICanvasLayer" instance=ExtResource( 2 )]
+[node name="UIRoot" parent="ViewportContainer/Viewport/UICanvasLayer/Control" instance=ExtResource( 2 )]

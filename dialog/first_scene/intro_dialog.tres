@@ -53,7 +53,7 @@ blink = true
 [sub_resource type="Resource" id=6]
 script = ExtResource( 1 )
 nextItem = SubResource( 5 )
-text = "The world lived so far without my intervention.
+text = "The world lived so far without me doing anything.
 People have to feel emotions, that’s as important as eating and breathing."
 name = "Nyxie"
 portrait = ExtResource( 6 )

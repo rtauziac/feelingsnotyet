@@ -95,7 +95,8 @@ render_target_update_mode = 3
 [node name="UICanvasLayer" type="CanvasLayer" parent="ViewportContainer/Viewport"]
 
 [node name="UIRoot" parent="ViewportContainer/Viewport/UICanvasLayer" instance=ExtResource( 2 )]
+pause_mode = 1
+show_behind_parent = true
 
-[node name="Control" parent="ViewportContainer/Viewport/UICanvasLayer" instance=ExtResource( 1 )]
-
-[editable path="ViewportContainer/Viewport/UICanvasLayer/UIRoot"]
+[node name="Control" parent="ViewportContainer/Viewport/UICanvasLayer/UIRoot" instance=ExtResource( 1 )]
+show_behind_parent = true

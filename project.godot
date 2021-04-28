@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://testing/CheckClick.gd"
 }, {
+"base": "ViewportContainer",
+"class": "PostEffectManager",
+"language": "GDScript",
+"path": "res://PostEffectManager.gd"
+}, {
 "base": "Resource",
 "class": "SignalDialog",
 "language": "GDScript",
@@ -61,6 +66,7 @@ _global_script_class_icons={
 "FadeScreen": "",
 "Person": "res://editor/icons/dog.png",
 "PersonHandler": "",
+"PostEffectManager": "",
 "SignalDialog": "",
 "TextDialog": "",
 "WaitDialog": ""
@@ -68,7 +74,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ldjam48"
+config/name="Feelings Not Yet"
 run/main_scene="res://testing/MenuRoot.tscn"
 boot_splash/image="res://Splash.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
@@ -77,6 +83,7 @@ config/icon="res://icon_1.png"
 [autoload]
 
 GlobalReferences="*res://superobjects/GlobalReferences.gd"
+SoundManager="*res://sounds/SoundManager.gd"
 
 [display]
 

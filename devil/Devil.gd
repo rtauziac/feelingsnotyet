@@ -6,9 +6,10 @@ signal hurt
 
 
 export (PackedScene) var shardScene
-export (int) var lives = 3
+export (int) var start_lives = 3
 export (Resource) var intro_dialog
 export (Resource) var end_dialog
+onready var _lives = start_lives
 var _shard: Sprite = null
 var _current_shard: Sprite = null
 var _tweener: Tween
@@ -23,7 +24,7 @@ func start_shards():
 	set_process(true)
 	modulate = Color(1, 1, 1, 0)
 	_tweener.interpolate_property(self, "modulate", Color(1, 1, 1, 0), Color.white, 1, Tween.TRANS_LINEAR)
-	_tweener.start()	
+	_tweener.start()
 	connect("hurt", get_parent(), "shake")
 	if intro_dialog == null:
 		_timer.wait_time = 3
@@ -52,7 +53,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if _current_shard != null:
-			lives -= 1
+			_lives -= 1
 			$AudioStreamPlayer.stream = _hurt
 			$AudioStreamPlayer.play(0)
 			_tweener.stop_all()
@@ -60,7 +61,8 @@ func _input(event):
 			_timer.stop()
 			var anim_len = 0.3
 			_fade_out(anim_len)
-			if lives > 0:
+			GlobalReferences.post_effect_manager.set_vignette_factor(float(_lives) / float(start_lives))
+			if _lives > 0:
 				_timer.wait_time = anim_len
 				_timer.connect("timeout", self, "_destroy_then_create_new_shard", [], CONNECT_ONESHOT)
 				_timer.start()
@@ -72,6 +74,7 @@ func _input(event):
 				_timer.wait_time = 5
 				_timer.connect("timeout", self, "_destroy_and_continue", [], CONNECT_ONESHOT)
 				_timer.start()
+				GlobalReferences.post_effect_manager.set_color_scheme(GlobalReferences.post_effect_manager.ColorScheme.MARINE)
 
 
 func _create_shard(duration):

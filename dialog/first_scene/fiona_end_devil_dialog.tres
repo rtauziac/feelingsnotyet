@@ -69,7 +69,7 @@ blink = false
 [sub_resource type="Resource" id=8]
 script = ExtResource( 5 )
 nextItem = SubResource( 7 )
-wait_time = 3.0
+wait_time = 2.0
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 2 )

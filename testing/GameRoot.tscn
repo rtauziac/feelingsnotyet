@@ -1,19 +1,105 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://cemetery/cemetery.tscn" type="PackedScene" id=1]
 [ext_resource path="res://testing/UIRoot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PostEffectManager.gd" type="Script" id=3]
+[ext_resource path="res://posteffects/colorramps/darkred.tres" type="Texture" id=4]
+[ext_resource path="res://posteffects/colorramps/marine.tres" type="Texture" id=5]
+
+[sub_resource type="VisualShaderNodeVectorLen" id=11]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=12]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=13]
+constant = -0.5
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=14]
+function = 31
+
+[sub_resource type="VisualShaderNodeScalarClamp" id=15]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=16]
+operator = 2
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0, 0.32659, 0.401734, 0.471098 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.818225, 0.818225, 0.818225, 1, 0.91411, 0.91411, 0.91411, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+
+[sub_resource type="VisualShaderNodeTexture" id=19]
+texture = SubResource( 18 )
+
+[sub_resource type="VisualShaderNodeScalarOp" id=21]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=22]
+uniform_name = "vignetteFactor"
 
 [sub_resource type="VisualShaderNodeTexture" id=1]
 source = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=24]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=25]
+default_input_values = [ 0, 0.0, 1, 2.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=26]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=27]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=28]
+default_input_values = [ 0, 0.0, 1, 0.03 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=29]
+default_input_values = [ 0, 0.0, 1, 4.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=30]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=31]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=32]
+default_input_values = [ 0, 0.0, 1, 0.8 ]
+operator = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=33]
+default_input_values = [ 0, 0.0, 1, 2.0 ]
+operator = 3
 
 [sub_resource type="VisualShaderNodeTextureUniform" id=2]
 uniform_name = "ColorRamp"
 texture_type = 1
 color_default = 1
 
+[sub_resource type="VisualShaderNodeTextureUniform" id=7]
+uniform_name = "ColorRamp2"
+texture_type = 1
+color_default = 1
+
+[sub_resource type="VisualShaderNodeVectorScalarMix" id=8]
+
+[sub_resource type="VisualShaderNodeScalarClamp" id=9]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=10]
+uniform_name = "rampFade"
+
+[sub_resource type="VisualShaderNodeInput" id=20]
+input_name = "screen_uv"
+
 [sub_resource type="VisualShader" id=3]
 code = "shader_type canvas_item;
+uniform float vignetteFactor;
+uniform sampler2D tex_frg_16;
 uniform sampler2D ColorRamp : hint_black_albedo;
+uniform sampler2D ColorRamp2 : hint_black_albedo;
+uniform float rampFade;
 
 
 
@@ -32,17 +118,106 @@ void fragment() {
 		n_out2p1 = _tex_read.a;
 	}
 
+// Input:9
+	vec3 n_out9p0 = vec3(SCREEN_UV, 0.0);
+
+// Scalar:12
+	float n_out12p0 = -0.500000;
+
+// VectorOp:11
+	vec3 n_out11p0 = n_out9p0 + vec3(n_out12p0);
+
+// VectorLen:10
+	float n_out10p0 = length(n_out11p0);
+
+// ScalarFunc:13
+	float n_out13p0 = 1.0 - n_out10p0;
+
+// ScalarUniform:18
+	float n_out18p0 = vignetteFactor;
+
+// ScalarOp:28
+	float n_in28p1 = 0.80000;
+	float n_out28p0 = n_out18p0 - n_in28p1;
+
+// ScalarOp:29
+	float n_in29p1 = 2.00000;
+	float n_out29p0 = n_out28p0 / n_in29p1;
+
+// Input:22
+	float n_out22p0 = TIME;
+
+// ScalarOp:21
+	float n_in21p1 = 2.00000;
+	float n_out21p0 = n_out22p0 * n_in21p1;
+
+// ScalarFunc:26
+	float n_out26p0 = sin(n_out21p0);
+
+// ScalarOp:25
+	float n_in25p1 = 4.00000;
+	float n_out25p0 = n_out22p0 * n_in25p1;
+
+// ScalarFunc:27
+	float n_out27p0 = sin(n_out25p0);
+
+// ScalarOp:23
+	float n_out23p0 = n_out26p0 + n_out27p0;
+
+// ScalarOp:24
+	float n_in24p1 = 0.03000;
+	float n_out24p0 = n_out23p0 * n_in24p1;
+
+// ScalarOp:20
+	float n_out20p0 = n_out29p0 + n_out24p0;
+
+// ScalarOp:17
+	float n_out17p0 = n_out13p0 - n_out20p0;
+
+// ScalarClamp:14
+	float n_in14p1 = 0.00000;
+	float n_in14p2 = 1.00000;
+	float n_out14p0 = clamp(n_out17p0, n_in14p1, n_in14p2);
+
+// Texture:16
+	vec4 tex_frg_16_read = texture(tex_frg_16, vec3(n_out14p0).xy);
+	vec3 n_out16p0 = tex_frg_16_read.rgb;
+	float n_out16p1 = tex_frg_16_read.a;
+
+// VectorOp:15
+	vec3 n_out15p0 = n_out2p0 * n_out16p0;
+
 // TextureUniform:4
 	vec3 n_out4p0;
 	float n_out4p1;
 	{
-		vec4 n_tex_read = texture(ColorRamp, n_out2p0.xy);
+		vec4 n_tex_read = texture(ColorRamp, n_out15p0.xy);
 		n_out4p0 = n_tex_read.rgb;
 		n_out4p1 = n_tex_read.a;
 	}
 
+// TextureUniform:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 n_tex_read = texture(ColorRamp2, n_out15p0.xy);
+		n_out5p0 = n_tex_read.rgb;
+		n_out5p1 = n_tex_read.a;
+	}
+
+// ScalarUniform:8
+	float n_out8p0 = rampFade;
+
+// ScalarClamp:7
+	float n_in7p1 = 0.00000;
+	float n_in7p2 = 1.00000;
+	float n_out7p0 = clamp(n_out8p0, n_in7p1, n_in7p2);
+
+// VectorScalarMix:6
+	vec3 n_out6p0 = mix(n_out4p0, n_out5p0, n_out7p0);
+
 // Output:0
-	COLOR.rgb = n_out4p0;
+	COLOR.rgb = n_out6p0;
 
 }
 
@@ -51,24 +226,70 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -432, -50.75 )
+graph_offset = Vector2( -2448.96, 475.266 )
 mode = 1
 flags/light_only = false
+nodes/fragment/0/position = Vector2( 837, 374 )
 nodes/fragment/2/node = SubResource( 1 )
-nodes/fragment/2/position = Vector2( -126, 143.25 )
+nodes/fragment/2/position = Vector2( -867, 136.25 )
 nodes/fragment/4/node = SubResource( 2 )
-nodes/fragment/4/position = Vector2( 121, 74.25 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 0, 0, 2, 0, 4, 0 )
-
-[sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 0.0368958, 0.103844, 0.304688, 1, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+nodes/fragment/4/position = Vector2( -23, -42.75 )
+nodes/fragment/5/node = SubResource( 7 )
+nodes/fragment/5/position = Vector2( -23, 147.25 )
+nodes/fragment/6/node = SubResource( 8 )
+nodes/fragment/6/position = Vector2( 231, 186 )
+nodes/fragment/7/node = SubResource( 9 )
+nodes/fragment/7/position = Vector2( 18, 378 )
+nodes/fragment/8/node = SubResource( 10 )
+nodes/fragment/8/position = Vector2( -184, 373 )
+nodes/fragment/9/node = SubResource( 20 )
+nodes/fragment/9/position = Vector2( -2082.48, 372.314 )
+nodes/fragment/10/node = SubResource( 11 )
+nodes/fragment/10/position = Vector2( -1686.48, 370.314 )
+nodes/fragment/11/node = SubResource( 12 )
+nodes/fragment/11/position = Vector2( -1860.48, 360.314 )
+nodes/fragment/12/node = SubResource( 13 )
+nodes/fragment/12/position = Vector2( -2070.48, 440.314 )
+nodes/fragment/13/node = SubResource( 14 )
+nodes/fragment/13/position = Vector2( -1529.48, 370.314 )
+nodes/fragment/14/node = SubResource( 15 )
+nodes/fragment/14/position = Vector2( -1089.48, 378.314 )
+nodes/fragment/15/node = SubResource( 16 )
+nodes/fragment/15/position = Vector2( -603.48, 291.314 )
+nodes/fragment/16/node = SubResource( 19 )
+nodes/fragment/16/position = Vector2( -846.48, 367.314 )
+nodes/fragment/17/node = SubResource( 21 )
+nodes/fragment/17/position = Vector2( -1284.96, 428.266 )
+nodes/fragment/18/node = SubResource( 22 )
+nodes/fragment/18/position = Vector2( -2178.96, 567.266 )
+nodes/fragment/20/node = SubResource( 24 )
+nodes/fragment/20/position = Vector2( -1623.96, 545.266 )
+nodes/fragment/21/node = SubResource( 25 )
+nodes/fragment/21/position = Vector2( -2599.96, 666.266 )
+nodes/fragment/22/node = SubResource( 26 )
+nodes/fragment/22/position = Vector2( -2785.96, 669.266 )
+nodes/fragment/23/node = SubResource( 27 )
+nodes/fragment/23/position = Vector2( -2205.96, 719.266 )
+nodes/fragment/24/node = SubResource( 28 )
+nodes/fragment/24/position = Vector2( -2029.96, 708.266 )
+nodes/fragment/25/node = SubResource( 29 )
+nodes/fragment/25/position = Vector2( -2599.96, 784.266 )
+nodes/fragment/26/node = SubResource( 30 )
+nodes/fragment/26/position = Vector2( -2422.96, 692.266 )
+nodes/fragment/27/node = SubResource( 31 )
+nodes/fragment/27/position = Vector2( -2422.96, 772.266 )
+nodes/fragment/28/node = SubResource( 32 )
+nodes/fragment/28/position = Vector2( -2010.96, 545.266 )
+nodes/fragment/29/node = SubResource( 33 )
+nodes/fragment/29/position = Vector2( -1830.96, 531.266 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 6, 0, 5, 0, 6, 1, 7, 0, 6, 2, 8, 0, 7, 0, 9, 0, 11, 0, 12, 0, 11, 1, 11, 0, 10, 0, 10, 0, 13, 0, 14, 0, 16, 0, 16, 0, 15, 1, 6, 0, 0, 0, 15, 0, 4, 0, 15, 0, 5, 0, 2, 0, 15, 0, 13, 0, 17, 0, 17, 0, 14, 0, 22, 0, 21, 0, 23, 0, 24, 0, 22, 0, 25, 0, 20, 0, 17, 1, 24, 0, 20, 1, 21, 0, 26, 0, 26, 0, 23, 0, 25, 0, 27, 0, 27, 0, 23, 1, 18, 0, 28, 0, 28, 0, 29, 0, 29, 0, 20, 0 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 3 )
-shader_param/ColorRamp = SubResource( 5 )
+shader_param/vignetteFactor = 0.0
+shader_param/rampFade = 0.0
+shader_param/ColorRamp = ExtResource( 5 )
+shader_param/ColorRamp2 = ExtResource( 5 )
 
 [node name="GameRoot" type="Control"]
 __meta__ = {
@@ -79,9 +300,12 @@ __meta__ = {
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+marine_scheme = ExtResource( 5 )
+dark_red_scheme = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://persons/Louyse.tscn" type="PackedScene" id=1]
 [ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=2]
@@ -28,6 +28,8 @@
 [ext_resource path="res://dialog/first_scene/intro_devil_dialog_001.tres" type="Resource" id=26]
 [ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=27]
 [ext_resource path="res://dialog/first_scene/intro_dialog.tres" type="Resource" id=28]
+[ext_resource path="res://sounds/Outdoor_Ambiance.ogg" type="AudioStream" id=29]
+[ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=30]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -92,10 +94,20 @@ name = "Fiona"
 portrait = ExtResource( 17 )
 blink = false
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=21]
 script = ExtResource( 27 )
 nextItem = ExtResource( 26 )
 wait_time = 2.0
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 30 )
+nextItem = SubResource( 21 )
+signal_name = "vignette_factor:1"
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 30 )
+nextItem = SubResource( 20 )
+signal_name = "color_scheme:dark_red"
 
 [sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
@@ -185,7 +197,7 @@ close_dialog = SubResource( 9 )
 
 [node name="Devil" parent="Persons/Fiona" instance=ExtResource( 10 )]
 position = Vector2( 36.8973, 65.6333 )
-intro_dialog = SubResource( 10 )
+intro_dialog = SubResource( 18 )
 end_dialog = ExtResource( 19 )
 
 [node name="Charles" parent="Persons" instance=ExtResource( 4 )]
@@ -263,8 +275,6 @@ position = Vector2( 239.149, 16.9457 )
 texture = ExtResource( 15 )
 centered = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Persons"]
-
 [node name="CameraHolder" type="Node2D" parent="."]
 position = Vector2( 512, 300 )
 script = ExtResource( 25 )
@@ -276,6 +286,11 @@ smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraHolder"]
 anims/handshake = SubResource( 16 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 29 )
+autoplay = true
+bus = "outdoor"
 
 [editable path="Persons/Fiona/Devil"]
 [editable path="Persons/Charles"]
