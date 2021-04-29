@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/qubodup-BigMonster02.ogg-3459ba3d4f56db7cb05444b7a7fba096.oggstr"
+
+[deps]
+
+source_file="res://sounds/devil/qubodup-BigMonster02.ogg"
+dest_files=[ "res://.import/qubodup-BigMonster02.ogg-3459ba3d4f56db7cb05444b7a7fba096.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

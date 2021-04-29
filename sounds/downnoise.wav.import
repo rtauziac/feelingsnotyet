@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/downnoise.wav-1cbe1f450a56f6628d1a380447c34853.sample"
+
+[deps]
+
+source_file="res://sounds/downnoise.wav"
+dest_files=[ "res://.import/downnoise.wav-1cbe1f450a56f6628d1a380447c34853.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

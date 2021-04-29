@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://persons/Louyse.tscn" type="PackedScene" id=1]
 [ext_resource path="res://persons/SpriteSmogShader.tres" type="Shader" id=2]
@@ -27,15 +27,16 @@
 [ext_resource path="res://CameraHolder.gd" type="Script" id=25]
 [ext_resource path="res://dialog/first_scene/intro_devil_dialog_001.tres" type="Resource" id=26]
 [ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=27]
+[ext_resource path="res://devil/Shard.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sounds/Outdoor_Ambiance.ogg" type="AudioStream" id=29]
 [ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=30]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=3]
 script = ExtResource( 18 )
 text = "That’s me...
 If I want to help the girl I need to focus on someone other than myself."
@@ -43,12 +44,12 @@ name = "Nyxie"
 portrait = ExtResource( 20 )
 blink = false
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 18 )
 nextItem = ExtResource( 8 )
 text = "Stop talking, I’m testing my sense on you just to be sure..."
@@ -56,31 +57,22 @@ name = "Nyxie"
 portrait = ExtResource( 22 )
 blink = true
 
-[sub_resource type="Resource" id=5]
+[sub_resource type="Resource" id=6]
 script = ExtResource( 18 )
-nextItem = SubResource( 4 )
+nextItem = SubResource( 5 )
 text = "I’m your colleague Stephan, I know you very well. Do you need something?"
 name = "Stephan"
 portrait = ExtResource( 21 )
 blink = false
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=7]
-script = ExtResource( 18 )
-text = "Maybe I should try talking to close friends or family."
-name = "Nyxie"
-portrait = ExtResource( 20 )
-blink = true
-
 [sub_resource type="Resource" id=8]
 script = ExtResource( 18 )
-nextItem = SubResource( 7 )
-text = "She won’t talk to me.
-She’s too shocked by her loss she doesn’t pay attention to me."
+text = "Maybe I should try talking to close friends or family."
 name = "Nyxie"
 portrait = ExtResource( 20 )
 blink = true
@@ -88,32 +80,59 @@ blink = true
 [sub_resource type="Resource" id=9]
 script = ExtResource( 18 )
 nextItem = SubResource( 8 )
+text = "She won’t talk to me.
+She’s too shocked by her loss she doesn’t pay attention to me."
+name = "Nyxie"
+portrait = ExtResource( 20 )
+blink = true
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 18 )
+nextItem = SubResource( 9 )
 text = "..."
 name = "Fiona"
 portrait = ExtResource( 17 )
 blink = false
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=11]
 script = ExtResource( 27 )
 nextItem = ExtResource( 26 )
 wait_time = 2.0
 
-[sub_resource type="Resource" id=19]
+[sub_resource type="Resource" id=12]
 script = ExtResource( 30 )
-nextItem = SubResource( 10 )
+nextItem = SubResource( 11 )
+signal_name = "camera_focus:Fiona"
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 30 )
+nextItem = SubResource( 12 )
+signal_name = "camera_tracks_dialog:false"
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 30 )
+nextItem = SubResource( 13 )
 signal_name = "vignette_factor:1"
 
-[sub_resource type="Resource" id=20]
+[sub_resource type="Resource" id=15]
 script = ExtResource( 30 )
-nextItem = SubResource( 19 )
+nextItem = SubResource( 14 )
 signal_name = "color_scheme:dark_red"
 
-[sub_resource type="ShaderMaterial" id=21]
+[sub_resource type="Resource" id=16]
+script = ExtResource( 30 )
+nextItem = ExtResource( 19 )
+signal_name = "camera_tracks_dialog:true"
+
+[sub_resource type="Curve" id=23]
+_data = [ Vector2( 0, 0 ), 0.0, 0.484962, 0, 0, Vector2( 1, 1 ), 1.81135, 0.0, 0, 0 ]
+
+[sub_resource type="ShaderMaterial" id=17]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=22]
+[sub_resource type="Resource" id=18]
 script = ExtResource( 18 )
 nextItem = ExtResource( 8 )
 text = "I know Phillip.
@@ -123,12 +142,12 @@ name = "Charles"
 portrait = ExtResource( 23 )
 blink = false
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="ShaderMaterial" id=19]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/smogFactor = 0.0
 
-[sub_resource type="Resource" id=16]
+[sub_resource type="Resource" id=20]
 script = ExtResource( 18 )
 nextItem = ExtResource( 8 )
 text = "Phillip was everything to her."
@@ -136,16 +155,16 @@ name = "Louyse"
 portrait = ExtResource( 24 )
 blink = false
 
-[sub_resource type="Resource" id=17]
+[sub_resource type="Resource" id=21]
 script = ExtResource( 18 )
-nextItem = SubResource( 16 )
+nextItem = SubResource( 20 )
 text = "Poor Fiona.
 I’m not sure she’s gonna get through it, I know she’ll have trouble to recover."
 name = "Louyse"
 portrait = ExtResource( 24 )
 blink = false
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=22]
 length = 6.0
 loop = true
 tracks/0/type = "value"
@@ -164,7 +183,6 @@ tracks/0/keys = {
 [node name="2DRoot" type="Node2D"]
 position = Vector2( 0, -1 )
 script = ExtResource( 7 )
-dialog_start = ExtResource( 19 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 509.302, 296.699 )
@@ -177,42 +195,44 @@ __meta__ = {
 }
 
 [node name="Nyxie" parent="Persons" instance=ExtResource( 6 )]
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( 343, 147 )
 siblingpaths = "Stephan"
-close_dialog = SubResource( 2 )
+close_dialog = SubResource( 3 )
 
 [node name="Stephan" parent="Persons" instance=ExtResource( 9 )]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 263, 154 )
 siblingpaths = "Nyxie"
 is_open = true
-open_dialog = SubResource( 5 )
+open_dialog = SubResource( 6 )
 
 [node name="Fiona" parent="Persons" instance=ExtResource( 5 )]
-material = SubResource( 6 )
+material = SubResource( 7 )
 position = Vector2( 473, 205 )
-close_dialog = SubResource( 9 )
+close_dialog = SubResource( 10 )
 
 [node name="Devil" parent="Persons/Fiona" instance=ExtResource( 10 )]
-intro_dialog = SubResource( 20 )
-end_dialog = ExtResource( 19 )
+shardScene = ExtResource( 28 )
+intro_dialog = SubResource( 15 )
+end_dialog = SubResource( 16 )
+cutoff_curve = SubResource( 23 )
 
 [node name="Charles" parent="Persons" instance=ExtResource( 4 )]
-material = SubResource( 21 )
+material = SubResource( 17 )
 position = Vector2( 550, 156 )
 is_open = true
-open_dialog = SubResource( 22 )
+open_dialog = SubResource( 18 )
 
 [node name="Sprite" parent="Persons/Charles" index="0"]
 flip_h = true
 
 [node name="Louyse" parent="Persons" instance=ExtResource( 1 )]
-material = SubResource( 23 )
+material = SubResource( 19 )
 position = Vector2( 612, 246 )
 siblingpaths = "Fiona"
 is_open = true
-open_dialog = SubResource( 17 )
+open_dialog = SubResource( 21 )
 
 [node name="Sprite" parent="Persons/Louyse" index="0"]
 flip_h = true
@@ -273,8 +293,64 @@ position = Vector2( 239.149, 16.9457 )
 texture = ExtResource( 15 )
 centered = false
 
+[node name="Sprite11" type="Sprite" parent="Persons"]
+position = Vector2( 264.979, -113.296 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="Sprite12" type="Sprite" parent="Persons"]
+position = Vector2( 91.9068, -119.29 )
+texture = ExtResource( 11 )
+centered = false
+flip_h = true
+
+[node name="Sprite13" type="Sprite" parent="Persons"]
+position = Vector2( 165.887, 51.8174 )
+texture = ExtResource( 12 )
+centered = false
+flip_h = true
+
+[node name="Sprite14" type="Sprite" parent="Persons"]
+position = Vector2( 144.505, -117.453 )
+texture = ExtResource( 12 )
+centered = false
+flip_h = true
+
+[node name="Sprite15" type="Sprite" parent="Persons"]
+position = Vector2( 464.253, -122.766 )
+texture = ExtResource( 14 )
+centered = false
+
+[node name="Sprite16" type="Sprite" parent="Persons"]
+position = Vector2( 179.904, -18.8549 )
+texture = ExtResource( 14 )
+centered = false
+flip_h = true
+
+[node name="Sprite17" type="Sprite" parent="Persons"]
+position = Vector2( 313.507, -106.114 )
+texture = ExtResource( 13 )
+centered = false
+flip_h = true
+
+[node name="Sprite18" type="Sprite" parent="Persons"]
+position = Vector2( 117.508, -39.9086 )
+texture = ExtResource( 15 )
+centered = false
+flip_h = true
+
+[node name="Sprite19" type="Sprite" parent="Persons"]
+position = Vector2( 509.656, -154.51 )
+texture = ExtResource( 15 )
+centered = false
+
+[node name="Sprite20" type="Sprite" parent="Persons"]
+position = Vector2( 400.966, -93.929 )
+texture = ExtResource( 15 )
+centered = false
+
 [node name="CameraHolder" type="Node2D" parent="."]
-position = Vector2( 512, 300 )
+position = Vector2( 484, 361 )
 script = ExtResource( 25 )
 
 [node name="Camera2D" type="Camera2D" parent="CameraHolder"]
@@ -282,8 +358,10 @@ rotating = true
 current = true
 smoothing_enabled = true
 
+[node name="Sprite" type="Sprite" parent="CameraHolder/Camera2D"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraHolder"]
-anims/handshake = SubResource( 18 )
+anims/handshake = SubResource( 22 )
 
 [node name="Tween" type="Tween" parent="CameraHolder"]
 

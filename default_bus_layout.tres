@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=2]
+[gd_resource type="AudioBusLayout" load_steps=8 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=1]
 resource_name = "Compressor"
@@ -20,6 +20,26 @@ feedback/delay_ms = 288.0
 feedback/level_db = -18.79
 feedback/lowpass = 447.0
 
+[sub_resource type="AudioEffectLowPassFilter" id=4]
+resource_name = "LowPassFilter"
+cutoff_hz = 15414.0
+resonance = 0.57
+db = 3
+
+[sub_resource type="AudioEffectHighPassFilter" id=5]
+resource_name = "HighPassFilter"
+cutoff_hz = 4877.0
+
+[sub_resource type="AudioEffectAmplify" id=6]
+resource_name = "Amplify"
+volume_db = 2.97
+
+[sub_resource type="AudioEffectReverb" id=7]
+resource_name = "Reverb"
+room_size = 1.0
+damping = 0.84
+dry = 0.45
+
 [resource]
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true
@@ -39,3 +59,23 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = "Master"
+bus/3/name = "mutesfx"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = "Master"
+bus/3/effect/0/effect = SubResource( 4 )
+bus/3/effect/0/enabled = true
+bus/4/name = "monster"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = "Master"
+bus/4/effect/0/effect = SubResource( 5 )
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource( 6 )
+bus/4/effect/1/enabled = true
+bus/4/effect/2/effect = SubResource( 7 )
+bus/4/effect/2/enabled = true

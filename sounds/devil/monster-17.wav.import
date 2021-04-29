@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/monster-17.wav-7d0b1c4dba2360a6ac9263f7f18d2b6d.sample"
+
+[deps]
+
+source_file="res://sounds/devil/monster-17.wav"
+dest_files=[ "res://.import/monster-17.wav-7d0b1c4dba2360a6ac9263f7f18d2b6d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

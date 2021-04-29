@@ -9,6 +9,7 @@ export (PackedScene) var shardScene
 export (int) var start_lives = 3
 export (Resource) var intro_dialog
 export (Resource) var end_dialog
+export (Curve) var cutoff_curve: Curve
 onready var _lives = start_lives
 var _shard: Sprite = null
 var _current_shard: Sprite = null
@@ -19,12 +20,18 @@ var _rotate_amount = 0
 var _hurt = preload("res://sounds/hurt.wav")
 var _slash = preload("res://sounds/slash.wav")
 
+var _CUTOUT_MAX = 16000
+
 
 func start_shards():
 	set_process(true)
 	modulate = Color(1, 1, 1, 0)
 	_tweener.interpolate_property(self, "modulate", Color(1, 1, 1, 0), Color.white, 1, Tween.TRANS_LINEAR)
 	_tweener.start()
+	$MuteAudioStreamPlayer.play()
+	_set_outdoor_lp(200, 2)
+	_set_lp_cutoff(0)
+	_set_lp_cutoff(_CUTOUT_MAX, 2)
 	connect("hurt", get_parent(), "shake")
 	if intro_dialog == null:
 		_timer.wait_time = 3
@@ -33,6 +40,25 @@ func start_shards():
 	else:
 		GlobalReferences.dialog_master.show_dialog(intro_dialog)
 		GlobalReferences.dialog_master.connect("dialog_end_reached", self, "_create_shard", [3], CONNECT_ONESHOT)
+
+
+func _set_outdoor_lp(cutoff, duration = 0):
+	var bus_id = AudioServer.get_bus_index("outdoor")
+	var lpf: AudioEffectLowPassFilter = AudioServer.get_bus_effect(bus_id, 0)
+	if duration == 0:
+		lpf.cutoff_hz = cutoff
+	else:
+		_tweener.interpolate_property(lpf, "cutoff_hz", lpf.cutoff_hz, cutoff, duration, Tween.TRANS_LINEAR)
+		_tweener.start()
+
+func _set_lp_cutoff(cutoff, duration = 0):
+	var bus_id = AudioServer.get_bus_index("mutesfx")
+	var lpf: AudioEffectLowPassFilter = AudioServer.get_bus_effect(bus_id, 0)
+	if duration == 0:
+		lpf.cutoff_hz = cutoff
+	else:
+		_tweener.interpolate_property(lpf, "cutoff_hz", lpf.cutoff_hz, cutoff, duration, Tween.TRANS_LINEAR)
+		_tweener.start()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,14 +80,17 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		if _current_shard != null:
 			_lives -= 1
-			$AudioStreamPlayer.stream = _hurt
-			$AudioStreamPlayer.play(0)
+#			$AudioStreamPlayer.stream = _hurt
+#			$AudioStreamPlayer.play(0)
+			$HitStreamPlayer.play_sound()
 			_tweener.stop_all()
 			_timer.disconnect("timeout", self, "emit_hurt")
 			_timer.stop()
 			var anim_len = 0.3
 			_fade_out(anim_len)
-			GlobalReferences.post_effect_manager.set_vignette_factor(float(_lives) / float(start_lives))
+			var norm_factor: float = float(_lives) / float(start_lives)
+			GlobalReferences.post_effect_manager.set_vignette_factor(norm_factor)
+			_set_lp_cutoff(cutoff_curve.interpolate(norm_factor) * _CUTOUT_MAX, 1)
 			if _lives > 0:
 				_timer.wait_time = anim_len
 				_timer.connect("timeout", self, "_destroy_then_create_new_shard", [], CONNECT_ONESHOT)
@@ -71,6 +100,7 @@ func _input(event):
 				person_handler.remove_smog()
 				_tweener.interpolate_property(self, "modulate", modulate, Color(1, 1, 1, 0), 3)
 				_tweener.start()
+				_set_outdoor_lp(1700, 5)
 				_timer.wait_time = 5
 				_timer.connect("timeout", self, "_destroy_and_continue", [], CONNECT_ONESHOT)
 				_timer.start()
@@ -90,12 +120,14 @@ func _create_shard(duration):
 	_timer.wait_time = duration
 	_timer.connect("timeout", self, "emit_hurt", [], CONNECT_ONESHOT)
 	_timer.start()
+	$MonsterStreamPlayer.play_sound()
 
 
 func emit_hurt():
 	emit_signal("hurt")
-	$AudioStreamPlayer.stream = _slash
-	$AudioStreamPlayer.play(0)
+#	$AudioStreamPlayer.stream = _slash
+#	$AudioStreamPlayer.play(0)
+	$DeathStreamPlayer.play_sound()
 	var anim_len = 0.3
 	_fade_out(anim_len)
 	_timer.wait_time = anim_len

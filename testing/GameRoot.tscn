@@ -22,8 +22,8 @@ function = 31
 operator = 2
 
 [sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0, 0.32659, 0.401734, 0.471098 )
-colors = PoolColorArray( 0, 0, 0, 1, 0.818225, 0.818225, 0.818225, 1, 0.91411, 0.91411, 0.91411, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0, 0.250755, 0.311178, 0.401734, 0.540785 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.714954, 0.714954, 0.714954, 1, 0.818225, 0.818225, 0.818225, 1, 0.91411, 0.91411, 0.91411, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=8]
 gradient = SubResource( 7 )
@@ -91,7 +91,7 @@ color_default = 1
 uniform_name = "rampFade"
 
 [sub_resource type="VisualShaderNodeInput" id=28]
-input_name = "screen_uv"
+input_name = "uv"
 
 [sub_resource type="VisualShader" id=29]
 code = "shader_type canvas_item;
@@ -119,7 +119,7 @@ void fragment() {
 	}
 
 // Input:9
-	vec3 n_out9p0 = vec3(SCREEN_UV, 0.0);
+	vec3 n_out9p0 = vec3(UV, 0.0);
 
 // Scalar:12
 	float n_out12p0 = -0.500000;
@@ -226,7 +226,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -2448.96, 475.266 )
+graph_offset = Vector2( -1308, 251 )
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2( 837, 374 )
@@ -243,7 +243,7 @@ nodes/fragment/7/position = Vector2( 18, 378 )
 nodes/fragment/8/node = SubResource( 27 )
 nodes/fragment/8/position = Vector2( -184, 373 )
 nodes/fragment/9/node = SubResource( 28 )
-nodes/fragment/9/position = Vector2( -2082.48, 372.314 )
+nodes/fragment/9/position = Vector2( -2107.48, 332.314 )
 nodes/fragment/10/node = SubResource( 1 )
 nodes/fragment/10/position = Vector2( -1686.48, 370.314 )
 nodes/fragment/11/node = SubResource( 2 )
@@ -289,7 +289,7 @@ shader = SubResource( 29 )
 shader_param/vignetteFactor = 0.0
 shader_param/rampFade = 0.0
 shader_param/ColorRamp = ExtResource( 5 )
-shader_param/ColorRamp2 = ExtResource( 5 )
+shader_param/ColorRamp2 = ExtResource( 4 )
 
 [node name="GameRoot" type="Control"]
 __meta__ = {

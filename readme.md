@@ -20,7 +20,7 @@ This is the game I made for Ludum Dare 48.
 🔲 Better sounds  
 🔲 Soundtracks  
 ✅ One shot sound manager  
-🔲 Camera movements  
+✅ Camera movements  
 ✅ Better post effects  
 🔲 Better screen transitions  
 🔲 Better cursor (still a placeholder)

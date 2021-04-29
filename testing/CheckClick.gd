@@ -2,6 +2,8 @@ extends YSort
 
 class_name PersonHandler
 
+export (bool) var camera_tracks_dialog = true
+
 var _current_person: Person = null
 var _remove_current_person_at_end_dialog: bool = false
 var _speech01 = preload("res://sounds/speech1.wav")
@@ -24,16 +26,17 @@ func start_talk_person(person_name: String):
 			SoundManager.play_sound_oneshot(_speech02)
 		"Fiona":
 			SoundManager.play_sound_oneshot(_speech03)
-		"Charles":
-			SoundManager.play_sound_oneshot(_speech05)
 		"Louyse":
 			SoundManager.play_sound_oneshot(_speech04)
+		"Charles":
+			SoundManager.play_sound_oneshot(_speech05)
 		_:
 			SoundManager.play_sound_oneshot(_speech06)
 	var person = get_node_or_null(person_name)
 	if person is Person:
 		person.talk()
-		get_parent().get_node("CameraHolder").move_to_position(person.position)
+		if camera_tracks_dialog:
+			get_parent().get_node("CameraHolder").move_to_position(person.position)
 
 
 func set_smog_for_person(the_person: Person):
@@ -116,6 +119,16 @@ func _on_dialog_signal(signal_name):
 		match signal_name:
 			"focus_current_person":
 				_focus_current_person()
+			var sig:
+				if sig.begins_with("camera_tracks_dialog:"):
+					var ctd = sig.substr(21)
+					camera_tracks_dialog = false if ctd == "false" else true
+				elif sig.begins_with("camera_focus:"):
+					var person_name = sig.substr(13)
+					var person = get_node_or_null(person_name)
+					if person is Person:
+						get_parent().get_node("CameraHolder").move_to_position(person.position)
+					
 
 
 func _focus_current_person():

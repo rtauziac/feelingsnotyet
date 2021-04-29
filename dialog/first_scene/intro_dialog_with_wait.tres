@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://dialog/first_scene/intro_dialog.tres" type="Resource" id=1]
+[ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+nextItem = ExtResource( 1 )
+wait_time = 2.0

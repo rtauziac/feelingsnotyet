@@ -45,7 +45,7 @@ blink = true
 script = ExtResource( 2 )
 nextItem = SubResource( 4 )
 text = "The way you get rid of this creature!
-That’s indecent how you beat the thing up that easily."
+That’s unbelievable how you beat that thing up so easily."
 name = "Stephan"
 portrait = ExtResource( 7 )
 blink = true
@@ -92,7 +92,7 @@ blink = false
 script = ExtResource( 2 )
 nextItem = SubResource( 10 )
 text = "That’s right if you need time, take as much as you need.
-You don’t have to take it all on your shoulder."
+You don’t have to take it all on your shoulders."
 name = "Nyxie"
 portrait = ExtResource( 3 )
 blink = true
