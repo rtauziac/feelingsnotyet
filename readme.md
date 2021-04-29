@@ -18,7 +18,7 @@ This is the game I made for Ludum Dare 48.
 
 ✅ Better font  
 ✅ Better sounds  
-🔲 Better dialog sounds  
+✅ Better dialog sounds  
 🔲 Soundtracks  
 ✅ Audio filters  
 ✅ One shot sound manager  

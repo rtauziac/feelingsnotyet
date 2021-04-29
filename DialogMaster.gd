@@ -7,9 +7,11 @@ signal dialog_end_reached
 
 
 export (bool) var consume_inputs = true
+export (Curve) var message_alpha_curve: Curve
 var _current_dialog_item: DialogItem
 var _timer: Timer = Timer.new()
 var _text_tween: Tween = Tween.new()
+var _mouse_message_tween: Tween = Tween.new()
 var _showing_text_characters: bool = false
 var _audio_player: AudioStreamPlayer
 var _rnd = RandomNumberGenerator.new()
@@ -66,16 +68,28 @@ func show_dialog(item: DialogItem):
 		pass
 
 
+func show_mouse_message():
+	_mouse_message_tween.interpolate_method(self, "_interpolate_mouse_text", 0, 1, 7, Tween.TRANS_LINEAR)
+	_mouse_message_tween.start()
+
+
+func _interpolate_mouse_text(value):
+	get_parent().get_node("AdviceLabel").self_modulate = Color(1, 1, 1, message_alpha_curve.interpolate_baked(value))
+
+
 func _ready():
 	GlobalReferences.dialog_master = self
 	_audio_player = AudioStreamPlayer.new()
 	_audio_player.bus = "talk"
 	_rnd.randomize()
+	message_alpha_curve.bake()
 	add_child(_audio_player)
 	visible = false
 	add_child(_timer)
 	add_child(_text_tween)
+	add_child(_mouse_message_tween)
 	set_process_input(false)
+	GlobalReferences.dialog_master.connect("dialog_signal", self, "_on_dialog_message")
 
 
 func _process(_delta):
@@ -121,4 +135,12 @@ func _process_next_dialog():
 func _end_showing_characters():
 	_showing_text_characters = false
 #	print("stc false")
+
+
+func _on_dialog_message(dialog_message):
+	match dialog_message:
+		"show_mouse_message":
+			show_mouse_message()
+		_:
+			pass
 

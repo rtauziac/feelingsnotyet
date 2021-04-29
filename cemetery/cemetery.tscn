@@ -221,9 +221,6 @@ intro_dialog = SubResource( 15 )
 end_dialog = SubResource( 16 )
 cutoff_curve = SubResource( 23 )
 
-[node name="AudioStreamPlayer" parent="Persons/Fiona/Devil" index="1"]
-bus = "Master"
-
 [node name="Charles" parent="Persons" instance=ExtResource( 4 )]
 material = SubResource( 17 )
 position = Vector2( 550, 156 )

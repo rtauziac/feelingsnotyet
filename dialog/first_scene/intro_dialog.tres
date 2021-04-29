@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=19 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://dialog/text_dialog.gd" type="Script" id=1]
 [ext_resource path="res://dialog/wait_dialog.gd" type="Script" id=2]
@@ -7,9 +7,15 @@
 [ext_resource path="res://persons/faces/stephan_neutral.png" type="Texture" id=5]
 [ext_resource path="res://persons/faces/nixie_serious.png" type="Texture" id=6]
 [ext_resource path="res://persons/faces/stephan_worry.png" type="Texture" id=7]
+[ext_resource path="res://dialog/signal_dialog.gd" type="Script" id=8]
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 8 )
+signal_name = "show_mouse_message"
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 1 )
+nextItem = SubResource( 12 )
 text = "Let’s help this poor girl quick. I’ll talk to her."
 name = "Nyxie"
 portrait = ExtResource( 3 )
