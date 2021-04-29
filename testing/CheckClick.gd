@@ -3,35 +3,18 @@ extends YSort
 class_name PersonHandler
 
 export (bool) var camera_tracks_dialog = true
-
+onready var mind_probe_audio_player = $MindProbeStreamPlayer
 var _current_person: Person = null
 var _remove_current_person_at_end_dialog: bool = false
-var _speech01 = preload("res://sounds/speech1.wav")
-var _speech02 = preload("res://sounds/speech2.wav")
-var _speech03 = preload("res://sounds/speech3.wav")
-var _speech04 = preload("res://sounds/speech4.wav")
-var _speech05 = preload("res://sounds/speech5.wav")
-var _speech06 = preload("res://sounds/speech6.wav")
+var _tweener: Tween
 
 
 func focus_person(the_person: Person):
 	set_smog_for_person(the_person)
+	_set_mind_probe_volume(1)
 
 
 func start_talk_person(person_name: String):
-	match person_name:
-		"Nyxie":
-			SoundManager.play_sound_oneshot(_speech01)
-		"Stephan":
-			SoundManager.play_sound_oneshot(_speech02)
-		"Fiona":
-			SoundManager.play_sound_oneshot(_speech03)
-		"Louyse":
-			SoundManager.play_sound_oneshot(_speech04)
-		"Charles":
-			SoundManager.play_sound_oneshot(_speech05)
-		_:
-			SoundManager.play_sound_oneshot(_speech06)
 	var person = get_node_or_null(person_name)
 	if person is Person:
 		person.talk()
@@ -49,15 +32,23 @@ func set_smog_for_person(the_person: Person):
 
 
 func remove_smog():
-		for person in get_children():
-			if person is Person:
-				person.fog = false
+	for person in get_children():
+		if person is Person:
+			person.fog = false
+	_set_mind_probe_volume(0)
 
 
 func _ready():
 	GlobalReferences.person_handler = self
 	set_process_input(false)
+	_tweener = Tween.new()
+	add_child(_tweener)
 	call_deferred("_ready_later")
+
+
+func _set_mind_probe_volume(vol):
+	_tweener.interpolate_property(mind_probe_audio_player, "volume_db", mind_probe_audio_player.volume_db, lerp(-80, 0, vol), 1, Tween.TRANS_LINEAR)
+	_tweener.start()
 
 func _ready_later():
 	GlobalReferences.dialog_master.connect("dialog_signal", self, "_on_dialog_signal")

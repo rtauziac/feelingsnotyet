@@ -226,7 +226,6 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -1308, 251 )
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2( 837, 374 )
@@ -289,7 +288,7 @@ shader = SubResource( 29 )
 shader_param/vignetteFactor = 0.0
 shader_param/rampFade = 0.0
 shader_param/ColorRamp = ExtResource( 5 )
-shader_param/ColorRamp2 = ExtResource( 4 )
+shader_param/ColorRamp2 = ExtResource( 5 )
 
 [node name="GameRoot" type="Control"]
 __meta__ = {

@@ -11,6 +11,8 @@ var _current_dialog_item: DialogItem
 var _timer: Timer = Timer.new()
 var _text_tween: Tween = Tween.new()
 var _showing_text_characters: bool = false
+var _audio_player: AudioStreamPlayer
+var _rnd = RandomNumberGenerator.new()
 onready var text_label: Label = $HBoxContainer/DialogContainer/TextMargin/DialogLabel
 
 func show_dialog(item: DialogItem):
@@ -31,6 +33,21 @@ func show_dialog(item: DialogItem):
 		_timer.start()
 		if item.name != null and item.name.length() > 0:
 			GlobalReferences.person_handler.start_talk_person(item.name)
+			match item.name:
+				"Fiona":
+					_audio_player.stream = preload("res://sounds/bit/bit01.wav")
+				"Louyse":
+					_audio_player.stream = preload("res://sounds/bit/bit02.wav")
+				"Stephan":
+					_audio_player.stream = preload("res://sounds/bit/bit03.wav")
+				"Nyxie":
+					_audio_player.stream = preload("res://sounds/bit/bit04.wav")
+				"Charles":
+					_audio_player.stream = preload("res://sounds/bit/bit05.wav")
+				_:
+					_audio_player.stream = preload("res://sounds/bit/bit01.wav")
+		else:
+			_audio_player.stream = preload("res://sounds/bit/bit01.wav")
 		if item.portrait != null:
 			$HBoxContainer/MarginContainer.visible = true
 			$HBoxContainer/MarginContainer/PortraitMargin/PortraitTexture.texture = item.portrait
@@ -51,11 +68,20 @@ func show_dialog(item: DialogItem):
 
 func _ready():
 	GlobalReferences.dialog_master = self
+	_audio_player = AudioStreamPlayer.new()
+	_audio_player.bus = "talk"
+	_rnd.randomize()
+	add_child(_audio_player)
 	visible = false
 	add_child(_timer)
 	add_child(_text_tween)
 	set_process_input(false)
 
+
+func _process(_delta):
+	if _showing_text_characters and not _audio_player.playing:
+		_audio_player.pitch_scale = _rnd.randf_range(0.98, 1.03)
+		_audio_player.play()
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:

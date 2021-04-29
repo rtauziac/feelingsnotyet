@@ -17,8 +17,10 @@ This is the game I made for Ludum Dare 48.
 ## To-do
 
 ✅ Better font  
-🔲 Better sounds  
+✅ Better sounds  
+🔲 Better dialog sounds  
 🔲 Soundtracks  
+✅ Audio filters  
 ✅ One shot sound manager  
 ✅ Camera movements  
 ✅ Better post effects  

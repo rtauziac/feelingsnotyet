@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=8 format=2]
+[gd_resource type="AudioBusLayout" load_steps=11 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=1]
 resource_name = "Compressor"
@@ -20,6 +20,21 @@ feedback/delay_ms = 288.0
 feedback/level_db = -18.79
 feedback/lowpass = 447.0
 
+[sub_resource type="AudioEffectReverb" id=9]
+resource_name = "Reverb"
+room_size = 0.52
+damping = 0.74
+spread = 0.11
+dry = 0.0
+wet = 0.47
+
+[sub_resource type="AudioEffectPhaser" id=10]
+resource_name = "Phaser"
+range_min_hz = 327.506
+range_max_hz = 436.419
+rate_hz = 0.117
+feedback = 0.5
+
 [sub_resource type="AudioEffectLowPassFilter" id=4]
 resource_name = "LowPassFilter"
 cutoff_hz = 15414.0
@@ -40,6 +55,10 @@ room_size = 1.0
 damping = 0.84
 dry = 0.45
 
+[sub_resource type="AudioEffectLowPassFilter" id=8]
+resource_name = "LowPassFilter"
+cutoff_hz = 1589.0
+
 [resource]
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true
@@ -53,12 +72,16 @@ bus/1/effect/0/effect = SubResource( 2 )
 bus/1/effect/0/enabled = true
 bus/1/effect/1/effect = SubResource( 3 )
 bus/1/effect/1/enabled = true
-bus/2/name = "sfx"
+bus/2/name = "mindprobe"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = -24.137
 bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 9 )
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource( 10 )
+bus/2/effect/1/enabled = true
 bus/3/name = "mutesfx"
 bus/3/solo = false
 bus/3/mute = false
@@ -79,3 +102,11 @@ bus/4/effect/1/effect = SubResource( 6 )
 bus/4/effect/1/enabled = true
 bus/4/effect/2/effect = SubResource( 7 )
 bus/4/effect/2/enabled = true
+bus/5/name = "talk"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = "Master"
+bus/5/effect/0/effect = SubResource( 8 )
+bus/5/effect/0/enabled = true

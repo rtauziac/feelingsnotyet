@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mind_probe.ogg-70c653226fe7e57ea9ba62440f54e9a6.oggstr"
+
+[deps]
+
+source_file="res://sounds/mind_probe.ogg"
+dest_files=[ "res://.import/mind_probe.ogg-70c653226fe7e57ea9ba62440f54e9a6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
